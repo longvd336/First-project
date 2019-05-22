@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/login_style.css">
+</head>
+<body>
+    
+    <form id = "login-form" method="POST" action ="/login">
+        <label id = "inside">Log In</label>
+        <div class="div-input">
+        <i class="far fa-user custom-icon " ></i>
+        <input class = "login-input"type = "text" placeholder="Username" name= "login_username" required>
+        </div>
+        <div class="div-input">
+        <i class="fas fa-key custom-icon "></i>    
+        <input class="login-input" type = "password" placeholder="Password" name ="login_password" required>
+        </div>
+        <div id= "div-button">
+        <input class = "button" type="submit" value ="SUBMIT">
+        <input class = "button" type ="reset" value = "RESET">
+        </div>
+        <p class = "message"> Not Registered? <a href="/register" style="color: black"> Register </a></p>
+    </form>
+    <a id="founder">Founder:@longpt@huynguyen@tungdo</a>
+    
+</body>
+</html>

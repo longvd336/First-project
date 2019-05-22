@@ -1,0 +1,80 @@
+html,body{
+    height: 100%;
+}
+body{
+    background: #f09433; 
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+    margin: 0;
+    display: flex;
+    font-family: 'Just Another Hand', cursive;
+    font-size: 15px;
+    justify-content: space-around;
+    align-items: center ;
+}
+#font-size{
+    padding-right:7%; 
+    font-size: 30px;
+}
+#avatar{
+   
+    width: 40%;
+    height: 70%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    
+}
+
+#register-form{
+    
+    background-color: rgba(241, 240, 238, 0.3);
+    padding-bottom:30px;
+    padding-left: 6%;
+    width: 40%;
+    height: 90%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 5%;
+
+}
+.div-input{
+    font-size: 20px;
+    width: 70%;
+}
+
+
+.input-style{
+    width: 70%;
+    height: 32px;
+    border-radius: 2rem;
+    border: none;
+    padding-left: 10%;
+    /* margin-left: -10%; */
+    
+}
+#div-button{
+    padding-top: 2%;
+    width: 40%;
+    display: flex;
+    justify-content: space-between ;
+
+}
+.button{
+    width: 100px;
+    height: 30px;
+    border-radius: 1rem ;
+    background-color: rgb(255, 255, 255) ;
+    border: none;
+    cursor: pointer;
+
+    
+}
+#login-button{
+    font-size: 25px;
+    color: white;
+}

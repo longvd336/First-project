@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/register_style.css">
+</head>
+<body>
+    <img id = "avatar" src="../static/images/instagramcover.jpg" alt="">
+    <form id="register-form" method = "POST" action = "/register" >
+        <br>
+        
+        <div class ="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {%if bollean == False%}
+            <p>Eror: </p>{{message}}
+        {% endif %}
+        <b id ="font-size">Sign-Up</b>
+        <div class="div-input">
+            <a>Username:</a>
+        
+            <input class="input-style" type = "text" placeholder="Username" name = "Username" required>
+        </div>
+        
+        <div class="div-input">     
+            <a>Password:</a>
+            <input class="input-style"type = "password" placeholder="Password" name = "Password" required>
+        </div>
+        
+        <div class="div-input">
+            Birthday:
+            <input class="input-style" type="date" name="DateofBirth">
+        </div>
+        
+        <div class="div-input">
+            Gender:<br>
+            <input type="radio" name="Gender" value="male" checked> Male
+            <input type="radio" name="Gender" value="female"> Female<br>
+            <input type="radio" name="Gender" value="other"> Other
+        </div>
+        
+        <div class="div-input">
+            Choose your avatar: 
+            <input id = "input-img" class="input-style" type="file">
+            <input style="display:none" id="img-upload" name="Avatar" type="text" value="">
+        </div>
+
+        <div class="div-input">
+            <a>Email:</a><br>
+            <input class="input-style"type = "email" placeholder="Email" name = "Email" required>
+        </div>
+        
+        <div class="div-input">
+            <a>Phone Number:</a><input class="input-style"type = "text" placeholder="Phone number" name="Phonenumber" required>
+        </div>
+        
+        <div class="div-input">
+            <a>Aboutme:</a><br>
+            <textarea  class ="input-style"rows="100" cols="100" id = "input-2" name ="Aboutme" >Write some thing about you! </textarea>
+        </div>
+        
+        
+        <div id= "div-button">
+            <input class = "button" type="submit" value ="Create">
+            <input class = "button" type ="reset" value = "Reset">
+        </div>
+
+        <a  id = "login-button"href="/login">Login</a>
+    </form>
+    <br>
+    
+    <script>
+        const inputImg = document.getElementById('input-img');
+        inputImg.addEventListener('change', (e) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                
+                const imgUpload = document.getElementById('img-upload');
+               
+                imgUpload.value = reader.result;
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        })
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Setting </title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/setting.css">
+</head>
+<body>
+    <div id="header">
+        <div> Setting your profile</div>
+
+    </div>
+    
+    <form method="POST" id="main">
+        <div id = "avatar">
+            <b>Avatar:</b><br>
+            <br>
+            <img src="{{setting_profile.Avatar}}" style="height: 400px; width: 400px; "alt=""><br>
+                
+            <input id="input-img" type="file" ><br>
+            <input style="display:none" id="img-upload" name="avatar" type="text" value="{{setting_profile.Avatar}}">
+        </div>
+        
+        
+        <div id= "form">
+            <div id='form-1'>
+                <div>
+                    <b>Username:</b>{{setting_profile.Username}}<br>
+                </div>
+                <div>
+                    <b>Password: </b><br>
+                    <input class = "input" type="password" placeholder="password" name ="password" value="{{setting_profile.Password}}"><br>
+
+                </div>
+                <div>
+                    <b>Date of Birth:</b><br>
+                    <input class = "input" type = "date" name = "dob" value="{{setting_profile.DateofBirth}}"><br>
+                </div>
+                <div>
+                    <b>Your Phonenumber:</b><br>
+                    <input class = "input" type = "text" name ="phonenumber" value="{{setting_profile.Phonenumber}}"><br>
+                </div>
+                <div>
+                    <b>Email:</b><br>
+                    <input class = "input" type = "email" name="email" value="{{setting_profile.Email}}"><br>
+                </div>
+                <div class = "aboutyou" >
+                    <b>Something about you:</b><br>
+                    <textarea rows="100" cols="100" id = "input-2" name ="aboutme">{{setting_profile.Aboutme}} </textarea>
+                    <br>
+                </div>
+                <div >
+                    <input  id ="button" type ="submit" value="Submit"/> 
+                </div>
+            </div>
+        </div>    
+    </form>
+    
+    <div id="footer">
+            <i class="fab fa-facebook-square fa-5x" ></i>
+    </div>
+    
+    <script>
+            const inputImg = document.getElementById('input-img');
+            inputImg.addEventListener('change', (e) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const imgUpload = document.getElementById('img-upload');
+                    imgUpload.value = reader.result;
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            })
+    </script>
+    
+</body>
+</html>
