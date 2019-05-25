@@ -2,37 +2,65 @@ from flask import Flask, render_template, request, redirect, session,flash
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from user_database import user_coll , post_coll
+import datetime
 
 app = Flask(__name__)
 app.secret_key = "3423"
 @app.route('/')
 def browser():
-    return render_template('login.html',)
+    return render_template('login.html')
 
 @app.route('/mylifestory')
 def home():
-    list_post = post_coll.find()
-    return render_template("mylifestory.html", list_post = list_post)
+
+    post = post_coll.find_one({'Username':session["logged"]})
+    user = user_coll.find_one({'Username':session["logged"]})
+
+    list_post = post['Post']
+    return render_template("mylifestory.html", list_post = list_post, user = user)
+    
 
 @app.route('/mylifestory/add_post', methods=['GET','POST'])
 def add_post():
     if request.method == 'GET':
-        return render_template('add_post.html')
+        post = post_coll.find_one({'Username':session["logged"]})
+        album_list=post['Album']
+        return render_template('add_post1.html', album_list = album_list)
     elif request.method == 'POST':
         form = request.form
-        new_post = {
-            'photo': form['img-upload'],
-            'description' : form['description'],
-        }
-    post_coll.insert_one(new_post)
+        current_user = post_coll.find_one({'Username':session["logged"]})
+        current_user_post = current_user["Post"]
+        date_time = datetime.datetime.now().strftime("%c")
+      
+        # new_post = {
+        #     'photo': form['img-upload'],
+        #     'description' : form['description'],
+        # }
+        if form['album'] != None:
+            add_post_1 = {"$push":{"Post":{ 'photo': form['img-upload'],'description' : form['description'], 'link':form['image'],'date':date_time,'album':form['album'] }}}
+        else:
+            add_post_1 = {"$push":{"Post":{ 'photo': form['img-upload'],'description' : form['description'], 'link':form['image'],'date':date_time,'album':'' }}}
+
+        # print(current_user)
+        # print(form['img-upload'],form['description'] )    
+        post_coll.update_one(current_user,add_post_1)
+    
+
+    
     return redirect('/mylifestory')
 
 
-@app.route('/mylifestory/delete/<id>')
-def delete(id):
-    post = post_coll.find_one({"_id": ObjectId(id)})
-    post_coll.delete_one(post)
+@app.route('/mylifestory/delete/<link>')
+def delete(link):
+    # post = post_coll.find_one({'Username':session['logged']})
+    # post_coll.delete_one(post)
+    post_collection = post_coll.find_one({"Username":session['logged']})
+    delete_image = post_collection["Post"]
+    delete_post = {"$pull":{"Post":{"link":link}}}
+    post_coll.update_one(post_collection,delete_post)
     return redirect('/mylifestory')
+
+
 
 
 # @app.route('/mylifestory')
@@ -131,11 +159,13 @@ def register():
                 'Phonenumber': register_phonenumber,
                 'Email':register_email,
                 'Aboutme': register_aboutme,
+                "Fullname":''
             }
 
             new_user_post = {
                 'Username':register_username,
                 'Post':new_list,
+                'Album':new_list,
             }
             user_coll.insert_one(new_user)
             post_coll.insert_one(new_user_post)
@@ -151,11 +181,11 @@ def setting_profile(id):
     setting_profile = user_coll.find_one({"_id":ObjectId(id)})
     
     if request.method == 'GET':
-        return render_template('setting.html', setting_profile= setting_profile)
+        return render_template('setting1.html', setting_profile= setting_profile)
     elif request.method =='POST':
         form = request.form
         new_value = {"$set":{
-            
+            'Fullname':form['fullname'],
             'Password': form['password'],
             'DateofBirth': form['dob'],
             'Avatar': form['avatar'],
@@ -167,6 +197,42 @@ def setting_profile(id):
         user_coll.update_one(setting_profile,new_value)
         return redirect('/mylifestory')
 
+# ANh-HUy
+@app.route('/mylifestory/album')
+def album():
+    all_user_album = post_coll.find_one({"Username":session['logged']})
+    user_album = all_user_album["Album"]
+    album_cover = all_user_album["Post"]
+    count = 0 
+    return render_template('album_general.html',user_album = user_album, album_cover = album_cover, count = count)
+
+@app.route('/mylifestory/album/<album_name>')
+def detail(album_name):
+    user_profile = post_coll.find_one({"Username":session['logged']})
+    user_post = user_profile["Post"]
+    user_album = user_profile["Album"]
+    return render_template('album_detail.html', user_post = user_post, user_album = user_album, album_name = album_name)
+
+# @app.route('/album/delete/<id>')
+# def delete(id):
+#     user_profile = post_coll.find_one({"username":"tungdo204"})
+#     user_profile = post_coll.find_one({"_id": ObjectId(id)})
+#     Foods.delete_one(food)
+#     return redirect('/album')
+
+@app.route('/mylifestory/album/add_album', methods = ['GET', 'POST'])
+def add_album():
+    if request.method == 'GET':
+        return render_template('add_album.html')
+    elif request.method == 'POST':
+        form = request.form
+        # new_album = {
+        #     'album_name': form['album_name_create'],
+        #     'album_desc': form['album_desc_create'],
+        # }
+        user_to_update = post_coll.find_one({"Username":session['logged']})
+        post_coll.update_one(user_to_update, {'$push':{'Album':{'album_name': form['album_name_create'],'album_desc': form['album_desc_create']}}})
+    return redirect('/mylifestory/album')
 
 
 if __name__ == '__main__':

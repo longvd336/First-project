@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Setting </title>
+<style>
+
+@import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css")
+html,body{
+    height: 100%;
+}
+
+body{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background:linear-gradient(to top left, #99ceff 0%, #ff99cc 100%);
+  overflow: hidden;
+}
+
+#header{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 25px;
+    color: #151E3F;
+    font-weight: 300;
+    letter-spacing: 2px;  
+}
+#main{
+    font-size: 15px;
+    font-family: 'Inconsolata', monospace;
+    display: flex;
+    width: 100%;
+    height: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-weight: 300;
+    color: #151E3F
+}
+#form{
+    border-radius: 5%;
+    background-color: rgba(241, 240, 238, 0.3);
+    width: 32%;
+    height: 80%;
+    display: flex;
+    justify-content: left;
+    align-items: right;
+    padding-bottom: 5%;
+    padding-left:5%;
+    box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+    font-weight: 300;
+    color: #151E3F;
+    
+}
+#form-1{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 80%;
+    color: #151E3F;
+    
+}
+.input{
+    box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+    font-size: 15px;
+    color: #151E3F;
+}
+.aboutyou{
+    height: 30%;
+    width: 100%; 
+    color: #151E3F; 
+}
+#input-2{
+    height: 70%;
+    width: 100%;
+    box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+    font-size: 15px;
+}
+#button {
+    width: flex;
+    height: 30px;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-weight: bold;    
+    font-family: 'Inconsolata', monospace;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing:1px;
+    box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+}
+#button:hover {
+    color: rgb(143, 140, 140);
+    transition: 0.3s ;
+}
+#footer{
+    width: 100%;
+    height: flex;
+    background-color: rgb(239, 235, 235);
+}
+</style>
+
+</head>
+<body>
+    <div id="header">
+        <div>CREAT NEW ALBUM</div>
+    </div>
+    <form method="POST" id="main">
+        <div id = "avatar">
+            <b>Avatar:</b><br>
+            <br>
+            <img src="{{setting_profile.Avatar}}" style="height: 400px; width: 400px; "alt=""><br>  
+            <input id="input-img" type="file" ><br>
+            <input style="display:none" id="img-upload" name="avatar" type="text" value="{{setting_profile.Avatar}}">
+        </div>
+             
+        <div id= "form">
+            <div id='form-1'>
+                <div>
+                    <b>Username:</b>{{setting_profile.Username}}<br><br>
+                </div> 
+                <div>
+                    <b>Fullname:</b>
+                    <input class="input" type='text' name="fullname" value={{setting_profile.Fullname}}><br><br>
+                </div>
+                <div>
+                    <b>Password: </b>
+                    <input class = "input" type="password" placeholder="password" name ="password" value="{{setting_profile.Password}}"><br>
+                    <br>
+                </div>
+                <div>
+                    <b>Date of Birth:</b>
+                    <input class = "input" type = "date" name = "dob" value="{{setting_profile.DateofBirth}}"><br>
+                    <br>
+                </div>
+                <div>
+                    <b>Phone number:</b>
+                    <input class = "input" type = "text" name ="phonenumber" value="{{setting_profile.Phonenumber}}"><br>
+                    <br>
+                </div>
+                <div>
+                    <b>Email adress:</b>
+                    <input class = "input" type = "email" name="email" value="{{setting_profile.Email}}"><br>
+                    <br>
+                </div>
+                <div class = "aboutyou" >
+                    <b>About me:</b><br>
+                    <textarea rows="100" cols="100" id = "input-2" name ="aboutme">{{setting_profile.Aboutme}} </textarea>
+                    <br>
+                </div>
+                <div >
+                    <input  id ="button" type ="submit" value="Submit"/> 
+                </div>
+            </div>
+        </div>    
+    </form>
+    
+    <div id="footer">
+            <i class="fab fa-facebook-square fa-5x" ></i>
+    </div>
+    
+    <script>
+            const inputImg = document.getElementById('input-img');
+            inputImg.addEventListener('change', (e) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const imgUpload = document.getElementById('img-upload');
+                    imgUpload.value = reader.result;
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            })
+    </script>
+    
+</body>
+</html>

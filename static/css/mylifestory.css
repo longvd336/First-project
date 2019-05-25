@@ -5,3 +5,8 @@ html,body{
 body{
     margin: 0;
 }
+#logout-button{
+    display: flex;
+    justify-content: flex-end;
+    
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Album</title>
+<style>
+
+body { 
+  font-family: 'Inconsolata', monospace; margin: 0; 
+  height: 100vh;
+  background:linear-gradient(to top left, #99ffcc 0%, #ff99cc 100%);
+}
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 25px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-family: 'Inconsolata', monospace;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing:1px;
+}
+
+p {
+  font-family: 'Inconsolata', monospace;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing:1px;
+}
+
+div#quad { 
+  background-color: rgb(240, 226, 226); 
+  font-size: 0; width: 60%; 
+  margin: 0 auto;
+  box-shadow: 0 0 100px rgba(247, 245, 245, 0.8);
+}
+div#quad figure { 
+  margin: 0; width: 50%; 
+  height: auto; transition: 1s; 
+  display: inline-block; 
+  position: relative; overflow: hidden; 
+}
+div#quad figure:hover { cursor: pointer; z-index: 4; }
+div#quad figure img { width: 100%; height: auto; }
+div#quad figure:nth-child(1) { transform-origin: top left; }
+div#quad figure:nth-child(2) { transform-origin: top right; }
+div#quad figure:nth-child(3) { transform-origin: bottom left; }
+div#quad figure:nth-child(4) { transform-origin: bottom right; }
+div#quad figure figcaption { 
+  margin: 0; opacity: 0; 
+  background: rgba(0,0,0,0.3); 
+  color: #fff; padding: .3rem; 
+  font-size: 0.5rem; 
+  position: absolute; 
+  bottom: 0; width: 100%;
+	transition: 1s 1s opacity; 
+}
+.expanded { transform: scale(2); z-index: 5;  }
+div#quad figure.expanded figcaption { opacity: 1; }
+div.full figure:not(.expanded) { pointer-events: none; 
+}
+
+</style>
+</head>
+<body>
+
+<div style="text-align:center">
+    <h1>{{album_name}}</h1>
+    {% for album in user_album %}
+    {% if album.album_name == album_name %}
+    <h2>{{album.album_desc}}</h2>
+    {% endif %}
+    {% endfor %}
+    <p>Click on the image!</p>
+</div>
+
+<div id="quad">
+    {% for post in user_post %}
+    {% if post["album"] == album_name %}  
+    <figure>
+    <img src="{{post.photo}}" alt="{{post.description}}" >
+    <figcaption>{{post.description}}</figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}  
+  </div>
+</div>
+
+<script>
+var quadimages = document.querySelectorAll("#quad figure");
+for(i=0; i<quadimages.length; i++) {
+  quadimages[i].addEventListener('click', function(){ this.classList.toggle("expanded"); quad.classList.toggle("full") }); 
+}
+</script>
+
+</body>
+</html>

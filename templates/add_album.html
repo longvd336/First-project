@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Create Album</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Source+Sans+Pro:200,300,400,600');
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background:linear-gradient(to top left, #99ffcc 0%, #ff99cc 100%);
+  overflow: hidden;
+}
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 25px;
+  color: #151E3F;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+p {
+  font-family: 'Inconsolata', monospace;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing:1px;
+}
+
+.button {
+    width: flex;
+    height: 30px;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-weight: bold;    
+    font-family: 'Inconsolata', monospace;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing:1px;
+    box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+}
+.button:hover {
+    color: rgb(143, 140, 140);
+    transition: 0.3s ;
+}
+
+.input{
+  box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+  font-size: 15px;
+}
+    
+</style>
+</head>
+<body>
+    
+    <div style="text-align:center">
+            <h1>CREAT NEW ALBUM</h1>
+            <p>Please fill the below information</p>
+    </div>
+    <br>
+    <form method = "POST" style="text-align:center">
+        <input class="input" type="text" placeholder="Album Name" name="album_name_create" required> <br>
+        <br>
+        <input class="input" type="text" placeholder="Album Description" name="album_desc_create" required> <br>
+        <br>
+        <button class="button">Confirm</button>
+        <button class="button"><a href="/mylifestory/album" style="font-family:'Inconsolata', monospace ">All your album</a></button>
+    </form>
+    
+</body>
+</html>
