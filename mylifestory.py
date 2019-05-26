@@ -55,7 +55,6 @@ def delete(link):
     # post = post_coll.find_one({'Username':session['logged']})
     # post_coll.delete_one(post)
     post_collection = post_coll.find_one({"Username":session['logged']})
-    delete_image = post_collection["Post"]
     delete_post = {"$pull":{"Post":{"link":link}}}
     post_coll.update_one(post_collection,delete_post)
     return redirect('/mylifestory')
@@ -175,13 +174,42 @@ def register():
         else:
             flash("Your username has been used please choose another!!")
             return redirect(request.url)
+@app.route('/mylifestory/edit_post/<link>', methods=['GET', "POST"])
+def edit_post(link):
+    print(session['logged'])
+    all_post = post_coll.find_one({"Username":session['logged']})
+    post_list = all_post['Post']
+    for item in post_list:
+        if item['link'] == link:
+            if request.method == "GET":
+                return render_template("edit_post.html",post_detail= item )  
+            elif request.method == "POST":
+                form = request.form
+                
+                    
+                return redirect('/mylifestory')
+                # item["description"] = form["description"]
+    #             print(form["description"])
+    #             print("*"*10)
+    #             print(item["description"])
+    #             print("*"*10)
+    #             # print(post_list)
+    #             new_list = {"$set": {"Post": post_list}}
+    #             post_coll.update_one(all_post, new_list)
+    #             # test đi em
+    #             # k ddc anh oi
+    #             # edit kieu gi em?
+  
+# ddc ko anh oi
+
+
 
 @app.route('/mylifestory/setting/<id>', methods = ['GET', 'POST'])
 def setting_profile(id):
     setting_profile = user_coll.find_one({"_id":ObjectId(id)})
     
     if request.method == 'GET':
-        return render_template('setting1.html', setting_profile= setting_profile)
+        return render_template('setting.html', setting_profile= setting_profile)
     elif request.method =='POST':
         form = request.form
         new_value = {"$set":{

@@ -1,97 +1,418 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Register</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/register_style.css">
+
+<style>
+
+
+
+body{
+
+    background: linear-gradient(to top left, #99ffcc 0%, #ff99cc 100%);
+
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+
+    margin: 0;
+
+    display: flex;
+
+    font-size: 15px;
+
+    font-family: 'Inconsolata', monospace;
+
+    justify-content: space-evenly;
+
+    align-items: center ;
+
+    font-weight: 300;
+
+    color: #151E3F;
+
+    height: 100vh;
+
+}
+
+
+
+#header{
+
+    font-family: 'Source Sans Pro', sans-serif;
+
+    font-size: 25px;
+
+    color: #151E3F;
+
+    font-weight: 300;
+
+    letter-spacing: 2px;  
+
+}
+
+#font-size{
+
+    font-family: 'Source Sans Pro', sans-serif;
+
+    font-size: 25px;
+
+    color: #151E3F;
+
+    font-weight: 300;
+
+    letter-spacing: 2px; 
+
+}
+
+#avatar{
+
+    width: 40%;
+
+    height: 70%;
+
+    display: flex;
+
+    flex-flow: column;
+
+    justify-content: center;   
+
+}
+
+
+
+#register-form{
+
+    background-color: rgba(241, 240, 238, 0.3);
+
+    padding-bottom: 30px;
+
+    padding-left: 5%;
+
+    width: flex;
+
+    height: flex;
+
+    display: flex;
+
+    flex-flow: column;
+
+    align-items: left;
+
+    justify-content: space-around;
+
+    border-radius: 5%;
+
+    font-weight: 300;
+
+    color: #151E3F;
+
+    box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+
+}
+
+.div-input{
+
+    font-size: 15px;
+
+    color: #151E3F;
+
+    font-weight: 300;
+
+    font-family: 'Inconsolata', monospace;  
+
+    width: flex;
+
+}
+
+.input-style{
+
+    width: 80%;
+
+    height: 30px;
+
+    border-radius: 1rem;
+
+    border: none;
+
+    padding-left: 5%;
+
+    padding-right: 5%;
+
+}
+
+#div-button{
+
+    padding-top: 2%;
+
+    width: 40%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    
+
+}
+
+.button {
+
+    width: flex;
+
+    height: 30px;
+
+    border-radius: 1rem;
+
+    cursor: pointer;
+
+    font-weight: bold;    
+
+    font-family: 'Inconsolata', monospace;
+
+    font-size: 15px;
+
+    text-align: center;
+
+    letter-spacing:1px;
+
+    color: #151E3F;
+
+    box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+
+}
+
+.button:hover {
+
+    color: rgb(143, 140, 140);
+
+    transition: 0.3s;
+
+}
+
+
+
+.login-button {
+
+    width: 30%;
+
+    height: 30px;
+
+    border-radius: 1rem;
+
+    cursor: pointer;
+
+    font-weight: bold;    
+
+    font-family: 'Inconsolata', monospace;
+
+    font-size: 17px;
+
+    text-align: center;
+
+    letter-spacing:1px;
+
+    color: #151E3F;
+
+    box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
+
+}
+
+.login-button:hover {
+
+    color: rgb(143, 140, 140);
+
+    transition: 0.3s;
+
+}
+
+
+
+</style>
+
+
+
 </head>
+
 <body>
+
     <img id = "avatar" src="../static/images/instagramcover.jpg" alt="">
+
     <form id="register-form" method = "POST" action = "/register" >
+
         <br>
+
         
+
         <div class ="container">
+
             {% with messages = get_flashed_messages(with_categories=true) %}
+
                 {% if messages %}
+
                     {% for category, message in messages %}
+
                     {{ message }}
+
                     {% endfor %}
+
                 {% endif %}
+
             {% endwith %}
+
         </div>
+
         {%if bollean == False%}
+
             <p>Eror: </p>{{message}}
+
         {% endif %}
-        <b id ="font-size">Sign-Up</b>
+
+        <h1 id ="font-size">SIGN UP</h1>
+
+        <br>
+
         <div class="div-input">
+
             <a>Username:</a>
-        
+
             <input class="input-style" type = "text" placeholder="Username" name = "Username" required>
-        </div>
-        
+
+        </div>    
+
+        <br>
+
         <div class="div-input">     
+
             <a>Password:</a>
+
             <input class="input-style"type = "password" placeholder="Password" name = "Password" required>
+
         </div>
-        
+
+        <br>
+
         <div class="div-input">
+
             Birthday:
+
             <input class="input-style" type="date" name="DateofBirth">
+
         </div>
-        
+
+        <br>
+
         <div class="div-input">
-            Gender:<br>
+
+            Gender:
+
             <input type="radio" name="Gender" value="male" checked> Male
-            <input type="radio" name="Gender" value="female"> Female<br>
+
+            <input type="radio" name="Gender" value="female"> Female
+
             <input type="radio" name="Gender" value="other"> Other
+
         </div>
-        
+
         <div class="div-input">
+
             Choose your avatar: 
+
             <input id = "input-img" class="input-style" type="file">
+
             <input style="display:none" id="img-upload" name="Avatar" type="text" value="">
+
         </div>
 
+
+
         <div class="div-input">
+
             <a>Email:</a><br>
+
             <input class="input-style"type = "email" placeholder="Email" name = "Email" required>
-        </div>
-        
-        <div class="div-input">
-            <a>Phone Number:</a><input class="input-style"type = "text" placeholder="Phone number" name="Phonenumber" required>
-        </div>
-        
-        <div class="div-input">
-            <a>Aboutme:</a><br>
-            <textarea  class ="input-style"rows="100" cols="100" id = "input-2" name ="Aboutme" >Write some thing about you! </textarea>
-        </div>
-        
-        
-        <div id= "div-button">
-            <input class = "button" type="submit" value ="Create">
-            <input class = "button" type ="reset" value = "Reset">
+
         </div>
 
-        <a  id = "login-button"href="/login">Login</a>
+        
+
+        <div class="div-input">
+
+            <a>Phone Number:</a><input class="input-style"type = "text" placeholder="Phone number" name="Phonenumber" required>
+
+        </div>
+
+        
+
+        <div class="div-input">
+
+            <a>About me:</a><br>
+
+            <input  class ="input-style"rows="100" cols="100" id = "input-2" name ="Aboutme" placeholder="Something about myself"> </input>
+
+        </div>
+
+        
+
+        
+
+        <div id= "div-button">
+
+            <input class = "button" type="submit" value ="Create">
+
+            <input class = "button" type ="reset" value = "Reset">
+
+        </div>
+
+        <br>
+
+        <form action="/login">
+
+            <button class="login-button">Login</button>
+
+            </form>
+
     </form>
+
     <br>
+
     
+
     <script>
+
         const inputImg = document.getElementById('input-img');
+
         inputImg.addEventListener('change', (e) => {
+
             const reader = new FileReader();
+
             reader.onload = () => {
+
                 
+
                 const imgUpload = document.getElementById('img-upload');
+
                
+
                 imgUpload.value = reader.result;
+
             }
+
             reader.readAsDataURL(e.target.files[0]);
+
         })
+
     </script>
+
     
+
 </body>
+
 </html>
+

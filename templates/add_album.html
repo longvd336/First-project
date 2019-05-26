@@ -52,9 +52,15 @@ p {
 }
 
 .input{
-  box-shadow: 0 0 12px rgba(247, 245, 245, 0.8);
-  font-size: 15px;
+  font-size: 15 px;
+  width: 30vh;
+  height: 30px;
+  border-radius: 1rem;
+  border: none;
+  padding-left: 5%;
+  padding-right: 5%;
 }
+
     
 </style>
 </head>
@@ -66,12 +72,14 @@ p {
     </div>
     <br>
     <form method = "POST" style="text-align:center">
-        <input class="input" type="text" placeholder="Album Name" name="album_name_create" required> <br>
+        <input class="input" type="text" placeholder="Album Name" name="album_name_create" > <br>
         <br>
-        <input class="input" type="text" placeholder="Album Description" name="album_desc_create" required> <br>
+        <input class="input" type="text" placeholder="Album Description" name="album_desc_create" > <br>
         <br>
         <button class="button">Confirm</button>
-        <button class="button"><a href="/mylifestory/album" style="font-family:'Inconsolata', monospace ">All your album</a></button>
+        <form action = "/mylifestory/album">
+          <button class="button">All your album</a></button>
+        </form>
     </form>
     
 </body>
