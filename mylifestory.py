@@ -37,9 +37,9 @@ def add_post():
         #     'description' : form['description'],
         # }
         if form['album'] != None:
-            add_post_1 = {"$push":{"Post":{ 'photo': form['img-upload'],'description' : form['description'], 'link':form['image'],'date':date_time,'album':form['album'] }}}
+            add_post_1 = {"$push":{"Post":{'$each':[{'photo': form['img-upload'],'description' : form['description'], 'link':form['image'],'date':date_time,'album':form['album']}],'$position':0}}}
         else:
-            add_post_1 = {"$push":{"Post":{ 'photo': form['img-upload'],'description' : form['description'], 'link':form['image'],'date':date_time,'album':'' }}}
+            add_post_1 = {"$push":{"Post":{'$each':[{ 'photo': form['img-upload'],'description' : form['description'], 'link':form['image'],'date':date_time,'album':'' }],'$position':0}}}
 
         # print(current_user)
         # print(form['img-upload'],form['description'] )    
@@ -176,7 +176,7 @@ def register():
             return redirect(request.url)
 @app.route('/mylifestory/edit_post/<link>', methods=['GET', "POST"])
 def edit_post(link):
-    print(session['logged'])
+
     all_post = post_coll.find_one({"Username":session['logged']})
     post_list = all_post['Post']
     for item in post_list:
@@ -185,22 +185,13 @@ def edit_post(link):
                 return render_template("edit_post.html",post_detail= item )  
             elif request.method == "POST":
                 form = request.form
+                post_coll.replace_one({ 'Username':session['logged']},
+                {'description':form['description']},
                 
+                )
                     
+
                 return redirect('/mylifestory')
-                # item["description"] = form["description"]
-    #             print(form["description"])
-    #             print("*"*10)
-    #             print(item["description"])
-    #             print("*"*10)
-    #             # print(post_list)
-    #             new_list = {"$set": {"Post": post_list}}
-    #             post_coll.update_one(all_post, new_list)
-    #             # test đi em
-    #             # k ddc anh oi
-    #             # edit kieu gi em?
-  
-# ddc ko anh oi
 
 
 
