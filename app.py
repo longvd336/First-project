@@ -185,10 +185,10 @@ def edit_post(link):
                 return render_template("edit_post.html",post_detail= item )  
             elif request.method == "POST":
                 form = request.form
-                post_coll.replace_one({ 'Username':session['logged']},
-                {'description':form['description']},
+                # post_coll.replace_one({ 'Username':session['logged']},
+                # {'description':form['description']},
                 
-                )
+                # )
                     
 
                 return redirect('/mylifestory')
