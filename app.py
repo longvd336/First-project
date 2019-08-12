@@ -12,10 +12,8 @@ def browser():
 
 @app.route('/mylifestory')
 def home():
-
     post = post_coll.find_one({'Username':session["logged"]})
     user = user_coll.find_one({'Username':session["logged"]})
-
     list_post = post['Post']
     return render_template("mylifestory.html", list_post = list_post, user = user)
     
@@ -216,7 +214,6 @@ def setting_profile(id):
         user_coll.update_one(setting_profile,new_value)
         return redirect('/mylifestory')
 
-# ANh-HUy
 @app.route('/mylifestory/album')
 def album():
     all_user_album = post_coll.find_one({"Username":session['logged']})
